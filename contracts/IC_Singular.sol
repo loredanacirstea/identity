@@ -18,13 +18,13 @@ contract IC_Singular  {
     address public Proofs;
 
     // featureType => address
-    mapping (bytes16 => address) featureContracts;
+    mapping (bytes16 => address) public featureContracts;
     // proofType => address
-    mapping (bytes16 => address) proofContracts;
+    mapping (bytes16 => address) public proofContracts;
 
     // owner => names
-    mapping(address => string) addressToName;
-    mapping(string => address) nameToOwner;
+    mapping(address => string) public addressToName;
+    mapping(string => address) public nameToOwner;
     // owner => featureType => featureID
     mapping(address => mapping(bytes16 => uint256)) allFeatures;
     // owner => features
