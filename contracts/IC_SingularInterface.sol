@@ -81,13 +81,4 @@ interface IC_Singular {
     ) external returns  (
         bool success
     );
-    
-    
-    
-    
-    
-    
-    
-
-
 }
