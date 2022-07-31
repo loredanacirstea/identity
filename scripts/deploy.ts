@@ -1,5 +1,4 @@
-const { ethers } = require("hardhat");
-const hre = require("hardhat");
+import { ethers } from "hardhat";
 
 async function main() {
   const Feature1 = await ethers.getContractFactory("Feature1");
