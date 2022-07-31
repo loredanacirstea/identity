@@ -2,23 +2,15 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
+import "./ProofLib.sol";
+
 contract Proof1 {
     // specific to this contract
     bytes16 TID = bytes16(bytes1(0x01));
 
-    struct Value {
-      address addedBy;
-      address target;
-      uint256 validUntil; // timestamp
-      // the id of the feature superceeded (if any)
-      bytes16 superceeds;
-      // IPFS CID
-      bytes CID;
-    }
-
     struct ValueWrap { 
       uint256 index;
-      Value value;
+      ProofLib.Value value;
     }
 
     
@@ -30,7 +22,7 @@ contract Proof1 {
   event LogUpdate(uint256 indexed index, bytes32 indexed key);
   event LogRemove(uint256 indexed index, bytes32 indexed key);
 
-  function getKey(Value memory v) view public returns (bytes32 key) {
+  function getKey(ProofLib.Value memory v) view public returns (bytes32 key) {
     return keccak256(abi.encodePacked(
         TID,
         v.addedBy,
@@ -48,7 +40,7 @@ contract Proof1 {
     return (valueIndex[values[key].index] == key);
   }
 
-  function insert(Value memory value) 
+  function insert(ProofLib.Value memory value) 
     public
     returns(uint index)
   {
@@ -78,7 +70,7 @@ contract Proof1 {
   function get(bytes32 key)
     public 
     view
-    returns(Value memory value)
+    returns(ProofLib.Value memory value)
   {
     require(isInstance(key), "Key does not belong to an instance");
     return values[key].value;
@@ -103,7 +95,7 @@ contract Proof1 {
   function getAtIndex(uint index)
     public
     view
-    returns(Value memory value)
+    returns(ProofLib.Value memory value)
   {
     return get(getKeyAtIndex(index));
   }
